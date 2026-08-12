@@ -1,19 +1,39 @@
 #include <iostream>
+#include <sstream>
 #include <string>
+#include <stack>
 int main(){
-     
-     std::string firstName,midName,lastname;
 
-     std::cout << "Enter the Full Name: ";
-     std::cin >> firstName >> midName >> lastname;
+    std::string name,word,temp;
+    std::string lName;
+    std::stack<std::string>sName;
+    std::stack<char>abb;
 
-     std::string Abbreviation;
-     Abbreviation += firstName[0];
-     Abbreviation += ".";     
-     Abbreviation += midName[0];
-     Abbreviation += ".";
-     Abbreviation += lastname;
-     
-     std::cout << Abbreviation;
-     return 0;
+    std::cout << "Enter the full name: ";
+    std::getline(std::cin,name);
+
+    std::stringstream ss(name);
+    
+    while(ss>>word){
+        sName.push(word);
+    }
+    if(!sName.empty()){
+        lName=sName.top();
+        sName.pop();
+    }
+
+    while (!sName.empty()){
+        temp=sName.top();
+        abb.push(temp[0]);
+        sName.pop();
+    }
+    
+    while(!abb.empty()){
+         std::cout << abb.top() <<". "; 
+         abb.pop();
+    }
+    std::cout << lName;
+    return 0;
 }
+
+// took a bit of help from ai about string stream 
